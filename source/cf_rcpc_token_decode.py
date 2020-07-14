@@ -5,7 +5,7 @@
 # Date: 2020/07/14
 #
 
-import modified_slow_aes as AES
+import slow_aes as AES
 import urllib.request
 import re
 
