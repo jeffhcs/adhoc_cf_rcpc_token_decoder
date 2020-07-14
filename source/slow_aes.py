@@ -643,26 +643,3 @@ def decrypt(cipher, key):
                             16
                     ))
             ).strip()
-
-if __name__ == "__main__":
-    moo = AESModeOfOperation()
-    # cleartext = "This is a test!"
-    # cypherkey = [143,194,34,208,145,203,230,143,177,246,97,206,145,92,255,84]
-    # iv = [103,35,148,239,76,213,47,118,255,222,123,176,106,134,98,92]
-    # mode, orig_len, ciph = moo.encrypt(cleartext, moo.modeOfOperation["CBC"],
-    #         cypherkey, moo.aes.keySize["SIZE_128"], iv)
-    # print 'm=%s, ol=%s (%s), ciph=%s' % (mode, orig_len, len(cleartext), ciph)
-    cypherkey = [233,238,75,3,193,208,130,41,135,24,93,39,188,162,51,120]
-    iv = [24,143,175,219,224,248,126,240,252,40,16,213,179,227,71,5]
-    mode = 2
-    orig_len = 16
-    ciph = [141,210,25,110,199,108,203,146,199,49,164,31,144,248,70,215]
-    decr = moo.decrypt(ciph, orig_len, mode, cypherkey,
-            moo.aes.keySize["SIZE_128"], iv)
-    print(decr)
-
-    # key = [233,238,75,3,193,208,130,41,135,24,93,39,188,162,51,120]
-    # iv = [24,143,175,219,224,248,126,240,252,40,16,213,179,227,71,5]
-    #[141,210,25,110,199,108,203,146,199,49,164,31,144,248,70,215]
-
-

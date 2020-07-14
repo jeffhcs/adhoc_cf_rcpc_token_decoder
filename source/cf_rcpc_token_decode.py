@@ -23,29 +23,21 @@ def parse_cipher(raw_response):
 
 #convert hex string to byte array
 def hex_to_bytes(hex_in):
-    cipher = []
-    for i in range(16):
-        byte = int(hex_in[i*2:i*2+2], 16)
-        cipher.append(byte)
-    return cipher
+    return [int(hex_in[i * 2:i * 2 + 2], 16) for i in range(16)]
 
 #decode cipher array using slow aes
-def cipher_decode(ciph):
+def cipher_decode(raw_cipher):
     aes = AES.AESModeOfOperation()
-    cypherkey = [233,238,75,3,193,208,130,41,135,24,93,39,188,162,51,120]
+    key = [233,238,75,3,193,208,130,41,135,24,93,39,188,162,51,120]
     iv = [24,143,175,219,224,248,126,240,252,40,16,213,179,227,71,5]
     mode = 2
     orig_len = 16
-    decr = aes.decrypt(ciph, orig_len, mode, cypherkey, aes.aes.keySize["SIZE_128"], iv)
-    return decr
+    decoded = aes.decrypt(raw_cipher, orig_len, mode, key, aes.aes.keySize["SIZE_128"], iv)
+    return decoded
 
 #convert decoded token into hex
 def bytes_to_hex(byte_array):
-    token = ""
-    for byte in byte_array:
-        raw_hex = hex(byte)[2:].zfill(2)
-        token += raw_hex
-    return token
+    return "".join([hex(byte)[2:].zfill(2) for byte in byte_array])
 
 raw_response = get_raw_cf_response()
 raw_cipher = parse_cipher(raw_response)
@@ -54,7 +46,6 @@ print(f"Cipher: {raw_cipher}")
 
 cipher_array = hex_to_bytes(raw_cipher)
 decoded = cipher_decode(cipher_array)
-
 token = bytes_to_hex(decoded)
 
 print(f"Token : {token}")
