@@ -36,7 +36,6 @@ def cipher_decode(ciph):
     iv = [24,143,175,219,224,248,126,240,252,40,16,213,179,227,71,5]
     mode = 2
     orig_len = 16
-    ciph = [141,210,25,110,199,108,203,146,199,49,164,31,144,248,70,215]
     decr = aes.decrypt(ciph, orig_len, mode, cypherkey, aes.aes.keySize["SIZE_128"], iv)
     return decr
 
