@@ -39,14 +39,16 @@ def cipher_decode(raw_cipher):
 def bytes_to_hex(byte_array):
     return "".join([hex(byte)[2:].zfill(2) for byte in byte_array])
 
-raw_response = get_raw_cf_response()
-raw_cipher = parse_cipher(raw_response)
+try:
+    raw_response = get_raw_cf_response()
+    raw_cipher = parse_cipher(raw_response)
 
-print(f"Cipher: {raw_cipher}")
+    print(f"Cipher: {raw_cipher}")
 
-cipher_array = hex_to_bytes(raw_cipher)
-decoded = cipher_decode(cipher_array)
-token = bytes_to_hex(decoded)
+    cipher_array = hex_to_bytes(raw_cipher)
+    decoded = cipher_decode(cipher_array)
+    token = bytes_to_hex(decoded)
 
-print(f"Token : {token}")
-
+    print(f"Token : {token}")
+except:
+    print("Something failed! Unable to get token.")
